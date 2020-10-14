@@ -789,3 +789,14 @@ div.wysiwyg ul.panel li a.removeFormat { background-position: -80px -64px; }
 div.wysiwyg ul.panel li a.empty { background-position: -64px -80px; }
 
 div.wysiwyg iframe { border: 0; margin: 5px 0 0 0; clear: left; width: 97.5% !important; }
+
+
+.prodsuccess{
+  color: #469400;
+  font-size: large;
+}
+
+.proderror{
+  color: red;
+  font-size: large;
+}

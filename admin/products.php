@@ -1,5 +1,53 @@
+<?php
+ include 'config.php';
+ $error=array();
+ $msg='';
+if(isset($_POST['submit']))
+{
+	$name=$_POST['name'];
+	$category=$_POST['category'];
+	$price=$_POST['price'];
+	$image=$_FILES['image']['name'];
+	$description=$_POST['description'];
+	if(sizeof($error)==0)
+	{
+		$sql = "SELECT * FROM products WHERE `name`='".$name."'";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0)
+		{
+			$error[]=array('input'=>'form','msg'=>"Product already exists");
+ 
+		}
+		else
+		{
+			$image=$_FILES['image']['name'];
+			move_uploaded_file($_FILES['image']['tmp_name'],'products/'.$_FILES['image']['name']);
+			$sql = "INSERT INTO products (`category`, `name`, `price`,`description`,`image`) VALUES ('".$category."', '".$name."', '".$price."', '".$description."','".$image."')";
+			$result = $conn->query($sql);
+		   if($result==TRUE)
+		   {
+			   $msg="Product added!!!";
+		   }
+		 //  $conn->close();
+   
+		}
+	}
+}
+if(isset($_GET['operation'])&& isset($_GET['id']))
+{
+	$id=$_GET['id'];
+	if($_GET['operation']=='delete')
+	{
+		$delete_sql="DELETE FROM products WHERE `product_id`='$id'";
+		$conn->query($delete_sql);
+	}
+}
+
+
+?>
 <?php include ('header.php');?>
-<?php include ('sidebar.php'); ?>		
+<?php include ('sidebar.php');?>
+
 		<div id="main-content"> <!-- Main Content Section with everything -->
 			
 			<noscript> <!-- Show a notification if the user has disabled javascript -->
@@ -47,16 +95,19 @@
 							<thead>
 								<tr>
 								   <th><input class="check-all" type="checkbox" /></th>
-								   <th>Column 1</th>
-								   <th>Column 2</th>
-								   <th>Column 3</th>
-								   <th>Column 4</th>
-								   <th>Column 5</th>
+								   <th>Id</th>
+								   <th>Image</th>
+								   <th>Name</th>
+								   <th>Category</th>
+								   <th>Price </th>
+								   <th>Description</th>
+								   <th>Action</th>
+
 								</tr>
 								
 							</thead>
 						 
-							<tfoot>
+							<!--<tfoot>
 								<tr>
 									<td colspan="6">
 										<div class="bulk-actions align-left">
@@ -75,124 +126,36 @@
 											<a href="#" class="number current" title="3">3</a>
 											<a href="#" class="number" title="4">4</a>
 											<a href="#" title="Next Page">Next &raquo;</a><a href="#" title="Last Page">Last &raquo;</a>
-										</div> <!-- End .pagination -->
+										</div>  End .pagination 
 										<div class="clear"></div>
 									</td>
 								</tr>
-							</tfoot>
+							</tfoot>     -->
 						 
 							<tbody>
+								<?php 
+									   $sql = "SELECT * FROM products";
+									   $result = $conn->query($sql);
+									   if ($result->num_rows > 0) {
+									   while($row = $result->fetch_assoc())
+									   {
+									?>
 								<tr>
 									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
+									<td><?php echo $row['product_id']; ?></td>
+									<td><img src="products/<?php echo $row['image']; ?>"></td>
+									<td><?php echo $row['name']; ?></td>
+									<td><?php echo $row['category']; ?></td>
+									<td><?php echo $row['price']; ?></td>
+									<td><?php echo $row['description']; ?></td>
 									<td>
 										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
+										 <a href="products.php?operation=edit&id=<?php echo $row['product_id'];?>" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
+										 <a href="products.php?operation=delete&id=<?php echo $row['product_id'];?>" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
+										 <a href="products.php"title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
 									</td>
 								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
-								
-								<tr>
-									<td><input type="checkbox" /></td>
-									<td>Lorem ipsum dolor</td>
-									<td><a href="#" title="title">Sit amet</a></td>
-									<td>Consectetur adipiscing</td>
-									<td>Donec tortor diam</td>
-									<td>
-										<!-- Icons -->
-										 <a href="#" title="Edit"><img src="resources/images/icons/pencil.png" alt="Edit" /></a>
-										 <a href="#" title="Delete"><img src="resources/images/icons/cross.png" alt="Delete" /></a> 
-										 <a href="#" title="Edit Meta"><img src="resources/images/icons/hammer_screwdriver.png" alt="Edit Meta" /></a>
-									</td>
-								</tr>
+								<?php } }?>
 							</tbody>
 							
 						</table>
@@ -201,34 +164,34 @@
 					
 					<div class="tab-content" id="tab2">
 					
-						<form action="#" method="post" enctype="multipart/form-data">
+						<form action="products.php" method="post" enctype="multipart/form-data">
 							
 							<fieldset> <!-- Set class to "column-left" or "column-right" on fieldsets to divide the form into columns -->
                             
                                 <p>
 									<label>Name</label>
-									<input class="text-input medium-input datepicker" type="text" id="medium-input" name="name" /> <span class="input-notification error png_bg">Error message</span>
+									<input required class="text-input medium-input datepicker"  type="text" id="medium-input" name="name" /> <!--<span class="input-notification error png_bg">Error message</span>  -->
 								</p>
 
 								<p>
 									<label>Price</label>
-										<input class="text-input small-input" type="text" id="small-input" name="price" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<input required class="text-input small-input" type="text" id="small-input" name="price" /> <!-- <span class="input-notification success png_bg"> Successful message</span> Classes for input-notification: success, error, information, attention -->  
                                 </p>
                                 
                                 <p>
 									<label>Image</label>
-										<input class="text-input small-input" type="file" id="image" name="price" /> <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
+										<input required class="text-input small-input" type="file" id="image" name="image" /> <!-- <span class="input-notification success png_bg">Successful message</span> <!-- Classes for input-notification: success, error, information, attention -->
 								</p>
 
 								
                                 <p>
 									<label>Category</label>              
-									<select name="dropdown" class="small-input">
-										<option value="1">Men</option>
-										<option value="2">Women</option>
-										<option value="3">Kids</option>
-                                        <option value="4">Electronics</option>
-                                        <option value="5">Sports</option>
+									<select name="category" class="small-input">
+										<option value="Men">Men</option>
+										<option value="Women">Women</option>
+										<option value="Kids">Kids</option>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Sports">Sports</option>
 									</select> 
 								</p>
 
@@ -245,11 +208,11 @@
 								
 								<p>
 									<label>Description</label>
-									<textarea class="text-input textarea wysiwyg" id="textarea" name="textfield" cols="79" rows="15"></textarea>
+									<textarea class="text-input textarea wysiwyg" id="textarea" name="description" cols="79" rows="15"></textarea>
 								</p>
 								
 								<p>
-									<input class="button" type="submit" value="Submit" />
+									<input class="button" type="submit" value="Submit" name="submit" />
 								</p>
 								
 							</fieldset>
@@ -257,6 +220,20 @@
 							<div class="clear"></div><!-- End .clear -->
 							
 						</form>
+						<div> 
+							<p class="prodsuccess"> <?php 
+								if($msg!=='')
+								{
+									echo $msg;
+								}?>
+							</p>
+							<p class="proderror">
+								<?php foreach($error as $err)
+								{?>
+									<?php echo $err['msg']; ?>
+								<?php } ?>
+							</p>
+						</div>
 						
 					</div> <!-- End #tab2 -->        
 					
