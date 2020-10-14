@@ -190,7 +190,7 @@ if(isset($_GET['operation'])&& isset($_GET['id']))
 										<option value="Men">Men</option>
 										<option value="Women">Women</option>
 										<option value="Kids">Kids</option>
-                                        <option value="Electronics">Electronics</option>
+									    <option value="Electronics">Electronics</option>
                                         <option value="Sports">Sports</option>
 									</select> 
 								</p>
@@ -198,14 +198,13 @@ if(isset($_GET['operation'])&& isset($_GET['id']))
 								
 								<p>
 									<label>Tags</label>
-                                    <input type="checkbox" name="fashion" /> Fashion <input type="checkbox" name="ecommerce" /> Ecommerce
+									 <input type="checkbox" name="fashion" /> Fashion <input type="checkbox" name="ecommerce" /> Ecommerce
                                     <input type="checkbox" name="shop" /> Shop
                                     <input type="checkbox" name="handbag" /> Handbag
                                     <input type="checkbox" name="laptop" /> Laptop
-                                    <input type="checkbox" name="headphone" /> Headphone
+    								<input type="checkbox" name="headphone" /> Headphone
 								</p>
-																
-								
+			
 								<p>
 									<label>Description</label>
 									<textarea class="text-input textarea wysiwyg" id="textarea" name="description" cols="79" rows="15"></textarea>
