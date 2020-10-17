@@ -24,7 +24,7 @@
 				</li>
 				
 				<li> 
-<a href="#" class="nav-top-item <?php if(in_array($filename,$productmenu)):?> current <?php endif; ?>"> <!-- Add the class "current" to current menu item -->
+					<a href="#" class="nav-top-item <?php if(in_array($filename,$productmenu)):?> current <?php endif; ?>"> <!-- Add the class "current" to current menu item -->
 					Products
 					</a>
 					<ul>
