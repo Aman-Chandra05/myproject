@@ -157,6 +157,8 @@
   <script type="text/javascript" src="js/nouislider.js"></script>
   <!-- Custom js -->
   <script src="js/custom.js"></script> 
+  <script src="js/myjs.js"></script> 
+
   
 
   </body>

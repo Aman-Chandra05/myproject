@@ -93,7 +93,7 @@
                 <li>
                   <figure>
                     <a class="aa-product-img" href="#"><img style="width:250px; height:300px" src="admin/products/<?php echo $list['image'];?>" alt="<?php echo $list['name'];?>"></a>
-                    <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                    <a class="aa-add-card-btn"href="#"data-productid="<?php echo $list['product_id'];?>"data-type="add"data-qty=1><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#"><?php echo $list['name'];?></a></h4>
                       <span class="aa-product-price">Rs.<?php echo $list['price'];?></span><span class="aa-product-price"></span>

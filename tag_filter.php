@@ -3,7 +3,7 @@
  include 'header.php'; 
  $cat_arr=array();
  $tag_arr=array();
- $sql="SELECT * FROM categories";
+ $sql="SELECT * FROM categories ";
  $result=$conn->query($sql);
  while($row = $result->fetch_assoc())
  {
@@ -25,8 +25,12 @@
  {
   $page=1;
  }
+ if(isset($_GET['tg_id']))
+ {
+     $cat_id=$_GET['tg_id'];
+ }
  $offset=($page-1)*$limit;
- $sql="SELECT * FROM products LIMIT $offset,$limit";
+ $sql="SELECT * FROM products WHERE category_id='$tg_id' LIMIT $offset,$limit";
  $result=$conn->query($sql);
  while($row = $result->fetch_assoc())
  {
@@ -198,7 +202,7 @@
             <div class="aa-product-catg-pagination">
               <nav>
               <?php
-               $sql="SELECT * FROM products";  
+                $sql="SELECT * FROM products WHERE category_id='$cat_id'";  
                $res=$conn->query($sql);
                if($res->num_rows >0)
                {
@@ -245,7 +249,7 @@
               <ul class="aa-catg-nav">
                 <?php foreach($cat_arr as $list)
                 {?>
-                 <li> <a href="cat_filter.php?id=<?php echo $list['category_id'];?>"><?php echo $list['category_name']; ?></a></li>
+                 <li> <a href="cat_filter.php?cat_id=<?php echo $list['category_id'];?>"><?php echo $list['category_name']; ?></a></li>
                 <?php 
                 } ?>
               </ul>
@@ -256,7 +260,7 @@
               <div class="tag-cloud">
               <?php foreach($tag_arr as $list)
                 {?>
-                 <a href="tag_filter.php?id=<?php echo $list['tag_id'];?>"><?php echo $list['tag_name']; ?></a>
+                 <a href="tag_filter.php?tg_id=<?php echo $list['tag_id'];?>"><?php echo $list['tag_name']; ?></a>
                 <?php 
                 } ?>
               </div>
