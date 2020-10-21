@@ -1,6 +1,6 @@
 <?php 
- include 'config.php';
  include 'header.php'; 
+ include 'config.php';
  $cat_arr=array();
  $tag_arr=array();
  $sql="SELECT * FROM categories";
@@ -201,7 +201,7 @@
             <div class="aa-product-catg-pagination">
               <nav>
               <?php
-               $sql="SELECT * FROM products";  
+               $sql="SELECT * FROM products WHERE category_id='$cat_id'";  
                $res=$conn->query($sql);
                if($res->num_rows >0)
                {

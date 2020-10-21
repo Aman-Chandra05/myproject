@@ -77,6 +77,26 @@ if($type=='add')
         }
     }		
 }
+if(isset($_POST['updatecart']) && $_POST['updatecart']=='Update Cart')
+{
+    $arr=array();
+    for($i=0;$i<count($_POST['qtys']);$i++)
+    {
+        $arr[$_POST['ids'][$i]]=$_POST['qtys'][$i];
+    }
+    //$cart=$_SESSION['cart'];
+    foreach($_SESSION['cart'] as $key=>$value)
+     foreach($arr as $k=>$v)
+     {
+         if($k==$value['product_id'])
+         {
+             if($value['quantity']!=$v)
+             $_SESSION['cart'][$key]['quantity']=$v;
+         }
+     }
+     header('location:cart.php');
+    
+}
 
 if($type=='delete')
 {

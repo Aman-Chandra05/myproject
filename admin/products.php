@@ -19,18 +19,16 @@ if(isset($_POST['submit']))
 	$name=$_POST['name'];
 	$category=$_POST['category'];
 	$price=$_POST['price'];
-//	$image=$_FILES['image']['name'];
 	$description=$_POST['description'];
 	$a=$_POST['tg'];
 	$b=implode(",",$a);
 	if(sizeof($error)==0)
 	{
-		$sql = "SELECT * FROM tags WHERE `tag_name`='".$name."'";
+		$sql = "SELECT * FROM products WHERE `name`='".$name."' AND `category_id`='".$category."' AND `price`='".$price."' AND `description`='".$description."' AND `image`='".$image."' AND `tag`='".$b."'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
-			$error[]=array('input'=>'form','msg'=>"Tag already exists");
- 
+			$error[]=array('input'=>'form','msg'=>"Product already exists");
 		}
 		else
 		{
@@ -62,7 +60,6 @@ if(isset($_POST['submit']))
 			   {
 				   $msg="Product added!!!";
 			   }	
-			 //  $conn->close();	
 			}	
 			header('location:products.php');			     
 		}
@@ -91,9 +88,8 @@ if(isset($_GET['operation'])&& isset($_GET['id']))
 		$b=explode(",",$a);
 	}
 }
-
-
 ?>
+
 <?php include ('header.php');?>
 <?php include ('sidebar.php');?>
 
@@ -336,5 +332,5 @@ if(isset($_GET['operation'])&& isset($_GET['id']))
 			</div>
        -->
 			<!-- End Notifications -->
-			<?php include ('footer.php'); ?>		
+ <?php include ('footer.php'); ?>		
 

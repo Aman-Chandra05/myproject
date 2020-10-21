@@ -1,5 +1,4 @@
 $(document).ready(function(){
-  console.log("myjs");
 
     $('.aa-add-card-btn').click(function(){
         var productid=$(this).data('productid');
@@ -36,5 +35,12 @@ $(document).ready(function(){
          window.location.href='cart.php';
         });
   });
+
+  $('.aa-cart-view-btn').click(function(){
+
+   // var query=$('#form').formSerialize();
+    console.log("query");
+    });
+
 
 });

@@ -1,6 +1,6 @@
 <?php 
- include 'config.php';
  include 'header.php'; 
+ include 'config.php';
  $cat_arr=array();
  $tag_arr=array();
  $sql="SELECT * FROM categories";

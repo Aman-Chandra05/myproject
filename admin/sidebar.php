@@ -1,6 +1,8 @@
 <div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
 <?php $filename = basename($_SERVER['REQUEST_URI']);
-      $productmenu = array('products.php','categories.php','tags.php');
+	  $productmenu = array('products.php','categories.php','tags.php');
+	  $usermenu = array('users.php');
+
 ?>
 			
 			<h1 id="sidebar-title"><a href="#">Simpla Admin</a></h1>
@@ -35,11 +37,11 @@
 				</li>
 				
 				<li>
-					<a href="#" class="nav-top-item">
+					<a href="#" class="nav-top-item <?php if(in_array($filename,$usermenu)):?> current <?php endif; ?>">
 						Users
 					</a>
 					<ul>
-						<li><a href="users.php">Manage Users</a></li>
+						<li><a href="users.php"<?php if($filename=='users.php'): ?> class="current" <?php endif; ?>>Manage Users</a></li>
 					</ul>
                 </li>
                 

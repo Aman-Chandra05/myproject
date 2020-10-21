@@ -35,30 +35,27 @@ if(isset($_POST['submit']))
 			   {
 				   $msg="Categoryg added!!!";
 			   }
-			 //  $conn->close();	
 			}	
-			header('location:categories.php');
-			     
+			header('location:categories.php');			     
 		}
 	}
 }
- if(isset($_GET['operation'])&& isset($_GET['id']))
- {
-	 $id=$_GET['id'];
-	 if($_GET['operation']=='delete')
-	 {
-		 $delete_sql="DELETE FROM categories WHERE `category_id`='$id'";
-		 $conn->query($delete_sql);
-		 header('location:categories.php');
-	 }
-	 if($_GET['operation']=='edit')
-	 { 
-		 $sql = "SELECT * FROM categories WHERE `category_id`='".$id."'";
-		 $result = $conn->query($sql);
-		 $row = $result->fetch_assoc();
-		 $category = $row['category_name'];
-	 }
-
+if(isset($_GET['operation'])&& isset($_GET['id']))
+{
+	$id=$_GET['id'];
+	if($_GET['operation']=='delete')
+	{
+		$delete_sql="DELETE FROM categories WHERE `category_id`='$id'";
+		$conn->query($delete_sql);
+		header('location:categories.php');
+	}
+	if($_GET['operation']=='edit')
+	{ 
+		$sql = "SELECT * FROM categories WHERE `category_id`='".$id."'";
+		$result = $conn->query($sql);
+		$row = $result->fetch_assoc();
+		$category = $row['category_name'];
+	}
  }
  ?>
 
@@ -121,7 +118,7 @@ if(isset($_POST['submit']))
 								
 							</thead>
 						 
-					<!--		<tfoot>
+				     	<!--<tfoot>
 								<tr>
 									<td colspan="6">
 										<div class="bulk-actions align-left">
@@ -240,10 +237,10 @@ if(isset($_POST['submit']))
 								<?php foreach($error as $err)
 								{?>
 									<?php echo $err['msg']; ?>
-								<?php } ?>
+								 <?php 
+								} ?>
 							</p>
 						</div>
-
 						
 					</div> <!-- End #tab2 -->        
 					
@@ -283,7 +280,7 @@ if(isset($_POST['submit']))
 					Error notification. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
 				</div>
 			</div>
--->
+			-->
 			<!-- End Notifications -->
-			<?php include ('footer.php'); ?>		
+ <?php include ('footer.php'); ?>		
 

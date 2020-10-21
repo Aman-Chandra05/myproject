@@ -1,5 +1,4 @@
-<?php 
- ?>
+
  <?php include 'header.php'; ?>
   <!-- catg header banner section -->
   <section id="aa-catg-head-banner">
@@ -27,7 +26,7 @@
          { ?>
          <div class="cart-view-area">
            <div class="cart-view-table">
-             <form action="">
+             <form action="manage_cart.php" method="POST">
                <div class="table-responsive">
                   <table class="table">
                     <thead>
@@ -42,20 +41,23 @@
                     </thead>
                     <?php if(isset($_SESSION['cart']) && (count($_SESSION['cart'])!=0))
                       { $total_price=0;
+                        $price=0;
                         echo '<tbody>';
                         foreach($_SESSION['cart'] as $key=>$value)
-                        {                      
+                        {  $i=0;$i++; $edit=array();                
                        ?>
                       <tr>
                         <td><a class="remove" href="#"data-productid="<?php echo $value['product_id'];?>"data-type="delete"><fa class="fa fa-close"></fa></a></td>
                         <td><a href="#"><img src="admin/products/<?php echo $value['image'];?>" alt="<?php echo $value['name'];?>"></a></td>
                         <td><a class="aa-cart-title" href="#"><?php echo $value['name'];?></a></td>
                         <td>Rs.<?php echo $value['price'];?></td>
-                        <td><input class="aa-cart-quantity" type="number" value="<?php echo $value['quantity'];?>"></td>
-                        <td>Rs.<?php echo ($value['quantity'] * $value['price']); ?></td>
+                        <td><input class="aa-cart-quantity" type="number"  name="qtys[]"value="<?php echo $value['quantity'];?>">
+                            <input type="hidden"  name="ids[]" value="<?php echo $value['product_id']; ?>">
+                        </td>
+                        <td>Rs.<?php $price=$value['quantity'] * $value['price']; echo $price; ?></td>
                       </tr>
                         <?php
-                        $total_price=$total_price + $value['price']; 
+                        $total_price=$total_price+$price ; 
                         } 
                         ?>
                       <tr>
@@ -64,7 +66,7 @@
                             <input class="aa-coupon-code" type="text" placeholder="Coupon">
                             <input class="aa-cart-view-btn" type="submit" value="Apply Coupon">
                           </div>
-                          <input class="aa-cart-view-btn" type="submit" value="Update Cart">
+                          <input class="aa-cart-view-btn" type="submit" value="Update Cart" name='updatecart'>
                         </td>
                       </tr>
                       </tbody>
