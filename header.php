@@ -107,7 +107,28 @@
                   <li class="hidden-xs"><a href="wishlist.html">Wishlist</a></li>
                   <li class="hidden-xs"><a href="cart.html">My Cart</a></li>
                   <li class="hidden-xs"><a href="checkout.html">Checkout</a></li>
+                  <?php
+                  if(isset($_SESSION['loginstatus']) && $_SESSION['loginstatus']=='active')
+                  {                   
+                  ?>
+                  <li><a href="logout.php">Logout</a></li>
+                  <?php
+                  }
+                  else
+                  {
+                  ?>
                   <li><a href="" data-toggle="modal" data-target="#login-modal">Login</a></li>
+                  <?php
+                  }
+                  ?>
+                  <?php
+                  if(isset($_SESSION['loginstatus']) && $_SESSION['loginstatus']=='active')
+                  {                   
+                  ?>
+                  <li>Welcome <?php echo $_SESSION['username'];?></li>
+                  <?php
+                  }
+                  ?>
                 </ul>
               </div>
             </div>

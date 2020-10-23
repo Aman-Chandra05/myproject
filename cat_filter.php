@@ -95,7 +95,7 @@
                 {  ?>
                 <li>
                   <figure>
-                    <a class="aa-product-img" href="#"><img style="width:250px; height:300px" src="admin/products/<?php echo $list['image'];?>" alt="<?php echo $list['name'];?>"></a>
+                    <a class="aa-product-img" href="product-detail.php?id=<?php echo $list['product_id'];?>"><img style="width:250px; height:300px" src="admin/products/<?php echo $list['image'];?>" alt="<?php echo $list['name'];?>"></a>
                     <a class="aa-add-card-btn"href="#"data-productid="<?php echo $list['product_id'];?>"data-type="add"data-qty=1><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                     <figcaption>
                       <h4 class="aa-product-title"><a href="#"><?php echo $list['name'];?></a></h4>
@@ -106,7 +106,7 @@
                   <div class="aa-product-hvr-content">
                     <a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
                     <a href="#" data-toggle="tooltip" data-placement="top" title="Compare"><span class="fa fa-exchange"></span></a>
-                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal"><span class="fa fa-search"></span></a>                            
+                    <a href="#" data-toggle2="tooltip" data-placement="top" title="Quick View" data-toggle="modal" data-target="#quick-view-modal" data-productid="<?php echo $list['product_id'];?>" class="forquickviews"><span class="fa fa-search"></span></a>                            
                   </div>
                   <!-- product badge -->
                   <!--<span class="aa-badge aa-sale" href="#">SALE!</span>  -->
@@ -127,13 +127,13 @@
                             <div class="simpleLens-gallery-container" id="demo-1">
                               <div class="simpleLens-container">
                                   <div class="simpleLens-big-image-container">
-                                      <a class="simpleLens-lens-image" data-lens-image="img/view-slider/large/polo-shirt-1.png">
-                                          <img src="img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image">
+                                      <!--<a class="simpleLens-lens-image" data-lens-image="img/view-slider/large/polo-shirt-1.png">
+                                          <img src="img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image">-->
                                       </a>
                                   </div>
                               </div>
                               <div class="simpleLens-thumbnails-container">
-                                  <a href="#" class="simpleLens-thumbnail-wrapper"
+                                  <!--<a href="#" class="simpleLens-thumbnail-wrapper"
                                      data-lens-image="img/view-slider/large/polo-shirt-1.png"
                                      data-big-image="img/view-slider/medium/polo-shirt-1.png">
                                       <img src="img/view-slider/thumbnail/polo-shirt-1.png">
@@ -148,7 +148,7 @@
                                      data-lens-image="img/view-slider/large/polo-shirt-4.png"
                                      data-big-image="img/view-slider/medium/polo-shirt-4.png">
                                       <img src="img/view-slider/thumbnail/polo-shirt-4.png">
-                                  </a>
+                                  </a>-->
                               </div>
                             </div>
                           </div>
@@ -156,12 +156,12 @@
                         <!-- Modal view content -->
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="aa-product-view-content">
-                            <h3>T-Shirt</h3>
+                            <h3 class="qname"></h3>
                             <div class="aa-price-block">
-                              <span class="aa-product-view-price">$34.99</span>
+                              <span class="aa-product-view-price"></span>
                               <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
+                            <p class="qdesc"></p>
                             <h4>Size</h4>
                             <div class="aa-prod-view-size">
                               <a href="#">S</a>
@@ -171,21 +171,20 @@
                             </div>
                             <div class="aa-prod-quantity">
                               <form action="">
-                                <select name="" id="">
-                                  <option value="0" selected="1">1</option>
-                                  <option value="1">2</option>
-                                  <option value="2">3</option>
-                                  <option value="3">4</option>
-                                  <option value="4">5</option>
-                                  <option value="5">6</option>
+                                <select name="" id="pqty">
+                                  <option value="1" selected="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
                                 </select>
                               </form>
                               <p class="aa-prod-category">
-                                Category: <a href="#">Polo T-Shirt</a>
                               </p>
                             </div>
                             <div class="aa-prod-view-bottom">
-                              <a href="#" class="aa-add-to-cart-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                              <a class="aa-add-to-cart-btn"data-productid="<?php echo $product_arr['product_id'];?>"data-type="add" href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                               <a href="#" class="aa-add-to-cart-btn">View Details</a>
                             </div>
                           </div>
@@ -201,8 +200,8 @@
             <div class="aa-product-catg-pagination">
               <nav>
               <?php
-               $sql="SELECT * FROM products WHERE category_id='$cat_id'";  
-               $res=$conn->query($sql);
+              $sql="SELECT * FROM products WHERE category_id='$cat_id'";  
+              $res=$conn->query($sql);
                if($res->num_rows >0)
                {
                 $total_records=$res->num_rows;

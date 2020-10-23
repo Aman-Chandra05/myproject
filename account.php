@@ -1,21 +1,68 @@
-  <!-- Subscribe section -->
-  <section id="aa-subscribe">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-subscribe-area">
-            <h3>Subscribe our newsletter </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, velit!</p>
-            <form action="" class="aa-subscribe-form">
-              <input type="email" name="" id="" placeholder="Enter your Email">
-              <input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
+<?php 
+include'header.php';
+include'config.php';
+ ?>
+  <!-- catg header banner section -->
+  <section id="aa-catg-head-banner">
+    <img src="img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+     <div class="container">
+      <div class="aa-catg-head-banner-content">
+        <h2>Account Page</h2>
+        <ol class="breadcrumb">
+          <li><a href="index.html">Home</a></li>                   
+          <li class="active">Account</li>
+        </ol>
       </div>
-    </div>
+     </div>
+   </div>
   </section>
-  <!-- / Subscribe section -->
+  <!-- / catg header banner section -->
+
+ <!-- Cart view section -->
+ <section id="aa-myaccount">
+   <div class="container">
+     <div class="row">
+       <div class="col-md-12">
+        <div class="aa-myaccount-area">         
+            <div class="row">
+              <div class="col-md-6">
+                <div class="aa-myaccount-login">
+                <h4>Login</h4>
+                 <form action="" class="aa-login-form">
+                  <label for="">Email address<span>*</span></label>
+                   <input type="email" placeholder="email" id='login_email' required>
+                   <label for="">Password<span>*</span></label>
+                    <input type="password" placeholder="Password" id='login_pass' required>
+                    <button type="button" class="aa-browse-btn" id='loginbtn'>Login</button>
+                    <label class="rememberme" for="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
+                    <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
+                  </form>
+                </div>
+                <div id="log_msg"></div>
+              </div>
+              <div class="col-md-6">
+                <div class="aa-myaccount-register">                 
+                 <h4>Register</h4>
+                 <form action="" class="aa-login-form">
+                    <label for="">Username<span>*</span></label>
+                    <input type="text" placeholder="Username" required name="username" id="username">
+                    <label for="">Email address<span>*</span></label>
+                    <input type="email" placeholder="email address"required name="email" id="email">
+                    <label for="">Password<span>*</span></label>
+                    <input type="password" placeholder="Password"required name="password" id="password">
+                    <button type="button" class="aa-browse-btn" id="regbtn">Register</button>                    
+                  </form>
+                </div>
+                <div id="reg_msg"></div>
+              </div>
+            </div>          
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- / Cart view section -->
 
   <!-- footer -->  
   <footer id="aa-footer">
@@ -118,18 +165,17 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4>Login or Register</h4>
           <form class="aa-login-form" action="">
-            <label for="">Email address<span>*</span></label>
-            <input type="email" placeholder="email" id='login_email' required>
+            <label for="">Username or Email address<span>*</span></label>
+            <input type="text" placeholder="Username or email">
             <label for="">Password<span>*</span></label>
-            <input type="password" placeholder="Password" id='login_pass' required>
-            <button type="button" class="aa-browse-btn" id='loginbtn'>Login</button>
+            <input type="password" placeholder="Password">
+            <button class="aa-browse-btn" type="submit">Login</button>
             <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
             <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
             <div class="aa-register-now">
-              Don't have an account?<a href="account.php">Register now!</a>
+              Don't have an account?<a href="account.html">Register now!</a>
             </div>
           </form>
-          <div id="log_msg"></div>
         </div>                        
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -137,7 +183,6 @@
 
 
     
-
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -159,6 +204,7 @@
   <!-- Custom js -->
   <script src="js/custom.js"></script> 
   <script src="js/myjs.js"></script> 
+ 
 
   </body>
 </html>
