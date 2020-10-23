@@ -2,13 +2,6 @@
 <?php 
 session_start();
 include 'config.php';
-/*if(isset($_SESSION['cart']))
-{
-echo "SESSION set";
-}
-else{
-echo "Session not set";
-}*/
 $id = $_POST['id'];
 $type = $_POST['type'];
 if(isset($_POST['qty']))
@@ -49,10 +42,6 @@ if($type=='add')
                 }
             }
         }
-        else
-        {
-           // echo "product already present";
-        }
     }
     else
     {
@@ -73,7 +62,6 @@ if($type=='add')
              //   echo "product added succseesflly";
                 break;
             }
-
         }
     }		
 }
@@ -94,8 +82,7 @@ if(isset($_POST['updatecart']) && $_POST['updatecart']=='Update Cart')
              $_SESSION['cart'][$key]['quantity']=$v;
          }
      }
-     header('location:cart.php');
-    
+     header('location:cart.php');   
 }
 
 if($type=='delete')
@@ -105,8 +92,7 @@ if($type=='delete')
         if($value['product_id']==$id)
         {
             unset($_SESSION['cart'][$key]);
-        }
-           
+        }          
     }
 }
 echo count($_SESSION['cart']);

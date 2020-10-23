@@ -22,7 +22,7 @@
    <div class="container">
      <div class="row">
        <div class="col-md-12">
-         <?php if(count($_SESSION['cart'])!=0)
+         <?php if(isset($_SESSION['cart']) && (count($_SESSION['cart'])!=0))
          { ?>
          <div class="cart-view-area">
            <div class="cart-view-table">

@@ -1,8 +1,17 @@
 <?php 
 include 'header.php';
+include 'config.php';
+if(isset($_GET['id']))
+{
+  $pid=$_GET['id'];
+}
+$sql = "SELECT products.*,categories.category_name FROM products, categories WHERE products.product_id='$pid' AND products.category_id=categories.category_id";
+$res=$conn->query($sql);
+$row=$res->fetch_assoc();
+$product_arr=$row;
 ?>
  
-  <!-- catg header banner section -->
+<!-- catg header banner section -->
   <section id="aa-catg-head-banner">
    <img src="img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
    <div class="aa-catg-head-banner-area">
@@ -33,17 +42,17 @@ include 'header.php';
                   <div class="aa-product-view-slider">                                
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
-                        <div class="simpleLens-big-image-container"><a data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-lens-image"><img src="img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image"></a></div>
+                        <div class="simpleLens-big-image-container"><a data-lens-image="admin/products/large/<?php echo $product_arr['image'];?>" class="simpleLens-lens-image"><img src="admin/products/medium/<?php echo $product_arr['image'];?>" class="simpleLens-big-image"></a></div>
                       </div>
                       <div class="simpleLens-thumbnails-container">
-                          <a data-big-image="img/view-slider/medium/polo-shirt-1.png" data-lens-image="img/view-slider/large/polo-shirt-1.png" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="img/view-slider/thumbnail/polo-shirt-1.png">
+                          <a data-big-image="admin/products/medium/<?php echo $product_arr['image'];?>" data-lens-image="admin/products/large/<?php echo $product_arr['image'];?>" class="simpleLens-thumbnail-wrapper" href="#">
+                            <img style="width:45px;height:55px" src="admin/products/<?php echo $product_arr['image'];?>">
                           </a>                                    
-                          <a data-big-image="img/view-slider/medium/polo-shirt-3.png" data-lens-image="img/view-slider/large/polo-shirt-3.png" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="img/view-slider/thumbnail/polo-shirt-3.png">
+                          <a data-big-image="admin/products/medium/<?php echo $product_arr['image'];?>" data-lens-image="admin/products/large/<?php echo $product_arr['image'];?>" class="simpleLens-thumbnail-wrapper" href="#">
+                            <img style="width:45px;height:55px" src="admin/products/<?php echo $product_arr['image'];?>">
                           </a>
-                          <a data-big-image="img/view-slider/medium/polo-shirt-4.png" data-lens-image="img/view-slider/large/polo-shirt-4.png" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="img/view-slider/thumbnail/polo-shirt-4.png">
+                          <a data-big-image="admin/products/medium/<?php echo $product_arr['image'];?>" data-lens-image="admin/products/large/<?php echo $product_arr['image'];?>" class="simpleLens-thumbnail-wrapper" href="#">
+                            <img style="width:45px;height:55px" src="admin/products/<?php echo $product_arr['image'];?>">
                           </a>
                       </div>
                     </div>
@@ -52,12 +61,12 @@ include 'header.php';
                 <!-- Modal view content -->
                 <div class="col-md-7 col-sm-7 col-xs-12">
                   <div class="aa-product-view-content">
-                    <h3>T-Shirt</h3>
+                    <h3><?php echo $product_arr['name'];?></h3>
                     <div class="aa-price-block">
-                      <span class="aa-product-view-price">$34.99</span>
+                      <span class="aa-product-view-price">Rs. <?php echo $product_arr['price'];?></span>
                       <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
+                    <p><?php echo $product_arr['description'];?></p>
                     <h4>Size</h4>
                     <div class="aa-prod-view-size">
                       <a href="#">S</a>
@@ -75,21 +84,21 @@ include 'header.php';
                     </div>
                     <div class="aa-prod-quantity">
                       <form action="">
-                        <select id="" name="">
-                          <option selected="1" value="0">1</option>
-                          <option value="1">2</option>
-                          <option value="2">3</option>
-                          <option value="3">4</option>
-                          <option value="4">5</option>
-                          <option value="5">6</option>
+                        <select id="pqty" name="">
+                          <option selected="1" value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
                         </select>
                       </form>
                       <p class="aa-prod-category">
-                        Category: <a href="#">Polo T-Shirt</a>
+                        Category: <a href="#"><?php echo $product_arr['category_name'];?></a>
                       </p>
                     </div>
                     <div class="aa-prod-view-bottom">
-                      <a class="aa-add-to-cart-btn" href="#">Add To Cart</a>
+                      <a class="aa-add-to-cart-btn"data-productid="<?php echo $product_arr['product_id'];?>"data-type="add" href="#">Add To Cart</a>
                       <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
                       <a class="aa-add-to-cart-btn" href="#">Compare</a>
                     </div>
@@ -350,27 +359,27 @@ include 'header.php';
                             <div class="simpleLens-gallery-container" id="demo-1">
                               <div class="simpleLens-container">
                                   <div class="simpleLens-big-image-container">
-                                      <a class="simpleLens-lens-image" data-lens-image="img/view-slider/large/polo-shirt-1.png">
-                                          <img src="img/view-slider/medium/polo-shirt-1.png" class="simpleLens-big-image">
+                                      <a class="simpleLens-lens-image" data-lens-image="admin/products/large/polo-shirt-1.png">
+                                          <img src="admin/products/medium/polo-shirt-1.png" class="simpleLens-big-image">
                                       </a>
                                   </div>
                               </div>
                               <div class="simpleLens-thumbnails-container">
                                   <a href="#" class="simpleLens-thumbnail-wrapper"
-                                     data-lens-image="img/view-slider/large/polo-shirt-1.png"
-                                     data-big-image="img/view-slider/medium/polo-shirt-1.png">
-                                      <img src="img/view-slider/thumbnail/polo-shirt-1.png">
+                                     data-lens-image="admin/products/large/polo-shirt-1.png"
+                                     data-big-image="admin/products/medium/polo-shirt-1.png">
+                                      <img src="admin/products/thumbnail/polo-shirt-1.png">
                                   </a>                                    
                                   <a href="#" class="simpleLens-thumbnail-wrapper"
-                                     data-lens-image="img/view-slider/large/polo-shirt-3.png"
-                                     data-big-image="img/view-slider/medium/polo-shirt-3.png">
-                                      <img src="img/view-slider/thumbnail/polo-shirt-3.png">
+                                     data-lens-image="admin/products/large/polo-shirt-3.png"
+                                     data-big-image="admin/products/medium/polo-shirt-3.png">
+                                      <img src="admin/products/thumbnail/polo-shirt-3.png">
                                   </a>
 
                                   <a href="#" class="simpleLens-thumbnail-wrapper"
-                                     data-lens-image="img/view-slider/large/polo-shirt-4.png"
-                                     data-big-image="img/view-slider/medium/polo-shirt-4.png">
-                                      <img src="img/view-slider/thumbnail/polo-shirt-4.png">
+                                     data-lens-image="admin/products/large/polo-shirt-4.png"
+                                     data-big-image="admin/products/medium/polo-shirt-4.png">
+                                      <img src="admin/products/thumbnail/polo-shirt-4.png">
                                   </a>
                               </div>
                             </div>
