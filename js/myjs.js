@@ -120,8 +120,27 @@ $(document).ready(function(){
           //console.log(msg);
          });  
     });
-
-
-  
-  
-    });
+  });
+function loginpop()
+  {
+    var email=$('#login_email').val();
+    var password=$('#login_pass').val();
+    console.log(email);
+    console.log(password);
+    $.ajax({
+      method: "POST",
+      url: "login.php",
+      data: { email:email, password:password   }
+    })
+    .done(function( msg ) {
+      if(msg=='present')
+      {
+        location.reload();
+      }
+      if(msg=='wrong')
+      {
+        $('#log_msg').html("<br><p style='color:red; font:large'> Enter correct login details </p>");
+       }
+        //console.log(msg);
+     });  
+  }

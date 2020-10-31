@@ -2460,6 +2460,7 @@ img {
   font-size: 14px;
 }
 #checkout .checkout-area .checkout-left .panel-group .aa-checkout-login input[type="text"],
+#checkout .checkout-area .checkout-left .panel-group .aa-checkout-login input[type="email"],
 #checkout .checkout-area .checkout-left .panel-group .aa-checkout-login input[type="password"] {
   border: 1px solid #ccc;
   font-size: 14px;

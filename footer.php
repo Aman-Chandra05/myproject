@@ -122,7 +122,7 @@
             <input type="email" placeholder="email" id='login_email' required>
             <label for="">Password<span>*</span></label>
             <input type="password" placeholder="Password" id='login_pass' required>
-            <button type="button" class="aa-browse-btn" id='loginbtn'>Login</button>
+            <button type="button" class="aa-browse-btn" onclick="loginpop()">Login</button>
             <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
             <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
             <div class="aa-register-now">
